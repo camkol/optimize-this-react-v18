@@ -13,6 +13,8 @@ import TodoItem from "./TodoItem";
 import Loader from "./Loader";
 import styles from "./Todos.module.css";
 
+const Confetti = React.lazy(() => import("./Confetti"));
+
 const Todos = () => {
   const [newTodoText, setNewTodoText] = useState("");
   const [showConfetti, setShowConfetti] = useState(false);
@@ -37,8 +39,6 @@ const Todos = () => {
   const formatTodoText = useCallback((text, index) => {
     return `${text.toLowerCase()} (${index + 1} of 500)`;
   }, []);
-
-  const Confetti = React.lazy(() => import("./Confetti"));
 
   return (
     <div className={styles.container}>
