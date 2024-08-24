@@ -1,7 +1,7 @@
-import React from 'react';
-import styles from './Todos.module.css';
+import React from "react";
+import styles from "./Todos.module.css";
 
-const TodoItem = (props) => {
+const TodoItem = React.memo((props) => {
   const {
     todo,
     animationsEnabled,
@@ -26,7 +26,7 @@ const TodoItem = (props) => {
 
       <div className={styles.actionsContainer}>
         <button
-          aria-label={todo.done ? 'Mark as todo' : 'Mark as done'}
+          aria-label={todo.done ? "Mark as todo" : "Mark as done"}
           onClick={() => {
             const nextDoneState = !todo.done;
 
@@ -35,7 +35,7 @@ const TodoItem = (props) => {
             }
 
             dispatch({
-              type: 'update',
+              type: "update",
               todo: {
                 ...todo,
                 done: nextDoneState,
@@ -43,13 +43,13 @@ const TodoItem = (props) => {
             });
           }}
         >
-          {todo.done ? '✅' : '⚪️'}
+          {todo.done ? "✅" : "⚪️"}
         </button>
         <button
-          aria-label='Delete task'
+          aria-label="Delete task"
           onClick={() => {
             dispatch({
-              type: 'delete',
+              type: "delete",
               id: todo.id,
             });
           }}
@@ -59,6 +59,6 @@ const TodoItem = (props) => {
       </div>
     </li>
   );
-};
+});
 
 export default TodoItem;
