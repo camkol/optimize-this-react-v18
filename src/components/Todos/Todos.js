@@ -5,7 +5,6 @@ import { generateRandomTodos } from "../../utils/utils";
 import useWindowSize from "../../hooks/useWindowSize";
 import TodoItem from "./TodoItem";
 import styles from "./Todos.module.css";
-import Confetti from "./Confetti";
 
 const Todos = () => {
   const [newTodoText, setNewTodoText] = useState("");
@@ -31,6 +30,8 @@ const Todos = () => {
   const formatTodoText = useCallback((text, index) => {
     return `${text.toLowerCase()} (${index + 1} of 500)`;
   }, []);
+
+  const Confetti = React.lazy(() => import("./Confetti"));
 
   return (
     <div className={styles.container}>
