@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
-import useToggle from '../../hooks/useToggle';
-import { ProfileContext } from '../../providers/ProfileProvider';
-import { checkUsernameValidity } from './checkUsernameValidity.js';
-import getIconOptions from './getIconOptions';
+import React, { useContext, useEffect, useMemo, useState } from "react";
+import useToggle from "../../hooks/useToggle";
+import { ProfileContext } from "../../providers/ProfileProvider";
+import { checkUsernameValidity } from "./checkUsernameValidity.js";
+import getIconOptions from "./getIconOptions";
 
-import styles from './Profile.module.css';
+import styles from "./Profile.module.css";
 
 const Profile = () => {
   const {
@@ -26,7 +26,7 @@ const Profile = () => {
     load();
   }, []);
 
-  const isUsernameValid = checkUsernameValidity(name);
+  const isUsernameValid = useMemo(() => checkUsernameValidity(name), [name]);
 
   const onSaveProfile = (e) => {
     e.preventDefault();
@@ -51,7 +51,7 @@ const Profile = () => {
       {showEditForm && (
         <aside className={styles.container}>
           <form onSubmit={onSaveProfile}>
-            <label htmlFor='username'>
+            <label htmlFor="username">
               <div className={styles.title}>
                 Username
                 <button onClick={onToggleUsernameValidation}>?</button>
@@ -63,18 +63,18 @@ const Profile = () => {
                 </>
               )}
               <input
-                type='text'
-                id='username'
-                name='username'
+                type="text"
+                id="username"
+                name="username"
                 onChange={(e) => setUsername(e.target.value)}
                 value={username}
               />
-              Username is {isUsernameValid ? 'valid.' : 'not valid.'}
+              Username is {isUsernameValid ? "valid." : "not valid."}
             </label>
             {iconOptions && (
               <>
-                <label htmlFor='icon'>Icon</label>
-                <select name='icon' id='icon' defaultValue={icon}>
+                <label htmlFor="icon">Icon</label>
+                <select name="icon" id="icon" defaultValue={icon}>
                   {iconOptions.map((icon) => (
                     <option key={icon} value={icon}>
                       {icon}
@@ -85,10 +85,10 @@ const Profile = () => {
             )}
 
             <div className={styles.actionsContainer}>
-              <button type='button' onClick={toggleShowEditForm}>
+              <button type="button" onClick={toggleShowEditForm}>
                 Cancel
               </button>
-              <button type='submit'>Save</button>
+              <button type="submit">Save</button>
             </div>
           </form>
         </aside>
